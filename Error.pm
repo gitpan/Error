@@ -15,7 +15,7 @@ use strict;
 use vars qw($VERSION);
 use 5.004;
 
-$VERSION = "0.14"; 
+$VERSION = "0.15"; 
 
 use overload (
 	'""'	   =>	'stringify',
@@ -131,6 +131,7 @@ sub new {
 	my $trace = Carp::longmess($text);
 	# Remove try calls from the trace
 	$trace =~ s/(\n\s+\S+__ANON__[^\n]+)?\n\s+eval[^\n]+\n\s+Error::subs::try[^\n]+(?=\n)//sog;
+	$trace =~ s/(\n\s+\S+__ANON__[^\n]+)?\n\s+eval[^\n]+\n\s+Error::subs::run_clauses[^\n]+\n\s+Error::subs::try[^\n]+(?=\n)//sog;
 	$err->{'-stacktrace'} = $trace
     }
 
