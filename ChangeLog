@@ -1,3 +1,25 @@
+Change 436 on 2000/03/29 by <gbarr@pobox.com> (Graham Barr)
+
+	Added ppd stuff to MANIFEST and Makefile.PL
+
+Change 435 on 2000/03/29 by <gbarr@pobox.com> (Graham Barr)
+
+	Changed README to contain examples from the POD
+
+Change 434 on 2000/03/29 by <gbarr@pobox.com> (Graham Barr)
+
+	Documentation updates
+	removed experimental warning, too many users now to change too much.
+
+Change 422 on 2000/03/28 by <gbarr@pobox.com> (Graham Barr)
+
+	Some tidy-ups
+
+Change 145 on 1998/05/31 by <gbarr@pobox.com> (Graham Barr)
+
+	Errno.pm
+	- Separated run_clauses out into a sub
+
 Oct 28 1997 <gbarr@pobox.com>
 
 	Error.pm #0.12

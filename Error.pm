@@ -1,6 +1,6 @@
 # Error.pm
 #
-# Copyright (c) 1995 Graham Barr <gbarr@ti.com>. All rights reserved.
+# Copyright (c) 1997-8 Graham Barr <gbarr@ti.com>. All rights reserved.
 # This program is free software; you can redistribute it and/or
 # modify it under the same terms as Perl itself.
 #
@@ -13,8 +13,9 @@ package Error;
 
 use strict;
 use vars qw($VERSION);
+use 5.004;
 
-$VERSION = "0.12";
+$VERSION = "0.13"; # $Id$
 
 use overload (
 	'""'	   =>	'stringify',
@@ -263,14 +264,100 @@ use vars qw(@EXPORT_OK @ISA %EXPORT_TAGS);
 
 @ISA = qw(Exporter);
 
+sub run_clauses ($$$\@) {
+    my($clauses,$err,$wantarray,$result) = @_;
+    my $code = undef;
+
+    $err = new Error::Simple($err) unless ref($err);
+
+    CATCH: {
+
+	# catch
+	my $catch;
+	if(defined($catch = $clauses->{'catch'})) {
+	    my $i = 0;
+
+	    CATCHLOOP:
+	    for( ; $i < @$catch ; $i += 2) {
+		my $pkg = $catch->[$i];
+		unless(defined $pkg) {
+		    #except
+		    splice(@$catch,$i,2,$catch->[$i+1]->());
+		    $i -= 2;
+		    next CATCH;
+		}
+		elsif($err->isa($pkg)) {
+		    $code = $catch->[$i+1];
+		    while(1) {
+			my $more = 0;
+			local($Error::THROWN);
+			my $ok = eval {
+			    if($wantarray) {
+				@{$result} = $code->($err,\$more);
+			    }
+			    elsif(defined($wantarray)) {
+			        @{$result} = ();
+				$result->[0] = $code->($err,\$more);
+			    }
+			    else {
+				$code->($err,\$more);
+			    }
+			    1;
+			};
+			if( $ok ) {
+			    next CATCHLOOP if $more;
+			    undef $err;
+			}
+			else {
+			    $err = defined($Error::THROWN)
+				    ? $Error::THROWN : $@;
+			    $err = new Error::Simple($err)
+				    unless ref($err);
+			}
+			last CATCH;
+		    };
+		}
+	    }
+	}
+
+	# otherwise
+	my $owise;
+	if(defined($owise = $clauses->{'otherwise'})) {
+	    my $code = $clauses->{'otherwise'};
+	    my $more = 0;
+	    my $ok = eval {
+		if($wantarray) {
+		    @{$result} = $code->($err,\$more);
+		}
+		elsif(defined($wantarray)) {
+		    @{$result} = ();
+		    $result->[0] = $code->($err,\$more);
+		}
+		else {
+		    $code->($err,\$more);
+		}
+		1;
+	    };
+	    if( $ok ) {
+		undef $err;
+	    }
+	    else {
+		$err = defined($Error::THROWN)
+			? $Error::THROWN : $@;
+		$err = new Error::Simple($err)
+			unless ref($err);
+	    }
+	}
+    }
+    $err;
+}
+
 sub try (&;$) {
     my $try = shift;
     my $clauses = @_ ? shift : {};
     my $ok = 0;
     my $err = undef;
     my @result = ();
-    my $result = undef;
-    my $wantarray = wantarray ? 1 : 0;
 
     unshift @Error::STACK, $clauses;
 
@@ -278,11 +365,11 @@ sub try (&;$) {
 	local $Error::THROWN = undef;
 
 	$ok = eval {
-	    if($wantarray) {
+	    if(wantarray) {
 		@result = $try->();
 	    }
-	    elsif(defined $wantarray) {
-		$result = $try->();
+	    elsif(defined wantarray) {
+		$result[0] = $try->();
 	    }
 	    else {
 		$try->();
@@ -296,96 +383,15 @@ sub try (&;$) {
 
     shift @Error::STACK;
 
-    unless($ok) {
-	my $code = undef;
-
-	$err = new Error::Simple($err) unless ref($err);
-
-	CATCH: {
-
-	    # catch
-	    my $catch;
-	    if(defined($catch = $clauses->{'catch'})) {
-		my $i = 0;
-
-		CATCHLOOP:
-		for( ; $i < @$catch ; $i += 2) {
-		    my $pkg = $catch->[$i];
-		    unless(defined $pkg) {
-			#except
-			splice(@$catch,$i,2,$catch->[$i+1]->());
-			$i -= 2;
-			next CATCH;
-		    }
-		    elsif($err->isa($pkg)) {
-			$code = $catch->[$i+1];
-			while(1) {
-			    my $more = 0;
-			    local($Error::THROWN);
-			    my $ok = eval {
-				if($wantarray) {
-				    @result = $code->($err,\$more);
-				}
-				elsif(defined($wantarray)) {
-				    $result = $code->($err,\$more);
-				}
-				else {
-				    $code->($err,\$more);
-				}
-				1;
-			    };
-			    if( $ok ) {
-				next CATCHLOOP if $more;
-				undef $err;
-			    }
-			    else {
-				$err = defined($Error::THROWN)
-					? $Error::THROWN : $@;
-				$err = new Error::Simple($err)
-					unless ref($err);
-			    }
-			    last CATCH;
-			};
-		    }
-		}
-	    }
-
-	    # otherwise
-	    my $owise;
-	    if(defined($owise = $clauses->{'otherwise'})) {
-		my $code = $clauses->{'otherwise'};
-		my $more = 0;
-		my $ok = eval {
-		    if($wantarray) {
-			@result = $code->($err,\$more);
-		    }
-		    elsif(defined($wantarray)) {
-			$result = $code->($err,\$more);
-		    }
-		    else {
-			$code->($err,\$more);
-		    }
-		    1;
-		};
-		if( $ok ) {
-		    undef $err;
-		}
-		else {
-		    $err = defined($Error::THROWN)
-			    ? $Error::THROWN : $@;
-		    $err = new Error::Simple($err)
-			    unless ref($err);
-		}
-	    }
-	}
-    }
+    $err = run_clauses($clauses,$err,wantarray,@result)
+	unless($ok);
 
     $clauses->{'finally'}->()
 	if(defined($clauses->{'finally'}));
 
     throw $err if defined($err);
 
-    wantarray ? @result : $result;
+    wantarray ? @result : $result[0];
 }
 
 # Each clause adds a sub to the list of clauses. The finally clause is
@@ -463,15 +469,15 @@ Error - Error/exception handling in an OO-ish way
 =head1 SYNOPSIS
 
     use Error qw(:try);
-    
+
     throw Error::Simple( "A simple error");
-    
+
     sub xyz {
         ...
 	record Error::Simple("A simple error")
 	    and return;
     }
-    
+ 
     unlink($file) or throw Error::Simple("$file: $!",$!);
 
     try {
@@ -496,15 +502,9 @@ Error - Error/exception handling in an OO-ish way
     }
     finally {
 	close_the_garage_door_already(); # Should be reliable
-    }
+    }; # Don't forget the trailing ; or you might be surprised
 
 =head1 DESCRIPTION
-
-B<WARNING WARNING WARNING WARNING WARNING WARNING WARNING>
-
-B<This module is still in an experimental stage.>
-
-B<WARNING WARNING WARNING WARNING WARNING WARNING WARNING>
 
 The C<Error> package provides two interfaces. Firstly C<Error> provides
 a procedural interface to exception handling. Secondly C<Error> is a
