@@ -1,0 +1,35 @@
+Oct 28 1997 <gbarr@pobox.com>
+
+	Error.pm #0.12
+
+	- Removed proceed clause
+
+Oct 27 1997 <gbarr@pobox.com>
+
+	Error.pm #0.11
+
+	- Fixed calling of otherwise clause if there are no catch claues
+
+Oct 21 1997 <gbarr@pobox.com>
+
+	Error.pm #0.10
+
+	- Added proceed clause, the return value from the proceed block
+	  will be returned by throw.
+	- try will now return the result from the try block
+	  or from the catch
+	- Changed except clause handling so that block is only evaluated
+	  once, the first time the result is required.
+	- Changed catch and proceed blocks to accept two arguments. The
+	  second argument is a reference to a scalar, which if set to true
+	  will cause Error to continue looking for a catch/proceed block
+	  when the block returns.
+
+Oct 19 1997 <gbarr@pobox.com>
+
+	- Added associate method so that an existing error may be associated
+	  with an object.
+
+Oct 10 1997 <gbarr@pobox.com>
+
+	- Initial release for private viewing

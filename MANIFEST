@@ -1,5 +1,8 @@
-MANIFEST
-Makefile.PL
 Error.pm
-TODO
+MANIFEST
 README
+Makefile.PL
+example
+t/01throw.t
+t/02order.t
+ChangeLog

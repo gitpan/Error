@@ -1,12 +1,4 @@
-The Error package defines an object which can be used to pass
-errors to a calling package. It also defines a second
-package called Error::Source which provides an interface that
-can be inherited by an object class to allow easy creation of
-errors.
+THIS PACKAGE IS STILL UNDER DEVELOPMENT AND AS SUCH IS SUBJECT TO CHANGE
 
-Copyright (c) 1995 Graham Barr <gbarr@ti.com>. All rights reserved.
-This program is free software; you can redistribute it and/or
-modify it under the same terms as Perl itself.
+USE AT YOUR OWN RISK.
 
-
-Share & Enjoy !
