@@ -1,3 +1,13 @@
+May 12 2001 <u_arunkumar@yahoo.com> (Arun Kumar U)
+
+	Error.pm #0.14
+
+	- Added overloading method for 'bool'. This was neccessary so that
+	  examining the value of $@ after a eval block, returns a true  
+		value
+	- Applied the diffs from Graham's code base
+	- Changed README with more information about the module
+
 Change 436 on 2000/03/29 by <gbarr@pobox.com> (Graham Barr)
 
 	Added ppd stuff to MANIFEST and Makefile.PL

@@ -15,11 +15,12 @@ use strict;
 use vars qw($VERSION);
 use 5.004;
 
-$VERSION = "0.13"; # $Id$
+$VERSION = "0.14"; 
 
 use overload (
 	'""'	   =>	'stringify',
 	'0+'	   =>	'value',
+	'bool'     =>	sub { return 1; },
 	'fallback' =>	1
 );
 
@@ -284,7 +285,7 @@ sub run_clauses ($$$\@) {
 		    #except
 		    splice(@$catch,$i,2,$catch->[$i+1]->());
 		    $i -= 2;
-		    next CATCH;
+		    next CATCHLOOP;
 		}
 		elsif($err->isa($pkg)) {
 		    $code = $catch->[$i+1];
@@ -361,14 +362,16 @@ sub try (&;$) {
 
     unshift @Error::STACK, $clauses;
 
+    my $wantarray = wantarray();
+
     do {
 	local $Error::THROWN = undef;
 
 	$ok = eval {
-	    if(wantarray) {
+	    if($wantarray) {
 		@result = $try->();
 	    }
-	    elsif(defined wantarray) {
+	    elsif(defined $wantarray) {
 		$result[0] = $try->();
 	    }
 	    else {
@@ -440,7 +443,7 @@ sub except (&;$) {
 	@$ref
     };
 
-    unshift @{$catch}, undef, $code;
+    unshift @{$catch}, undef, $sub;
 
     $clauses;
 }
@@ -732,5 +735,9 @@ Graham Barr <gbarr@pobox.com>
 The code that inspired me to write this was originally written by
 Peter Seibel <peter@weblogic.com> and adapted by Jesse Glick
 <jglick@sig.bsh.com>.
+
+=head1 MAINTAINER
+
+Arun Kumar U <u_arunkumar@yahoo.com>
 
 =cut
