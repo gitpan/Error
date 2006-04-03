@@ -1,3 +1,35 @@
+Apr 03 2006 <shlomif@iglu.org.il> (Shlomi Fish)
+
+  Error.pm #0.15005
+  - Fixed the conversion of textual messages to Error::Simple when
+    they contain information about an open filehandle. (as reported in
+    http://rt.cpan.org/Ticket/Display.html?id=6130 )
+
+Apr 02 2006 <shlomif@iglu.org.il> (Shlomi Fish)
+
+  Error.pm #0.15004
+  - Added POD to the lib/Error/Simple.pm module.
+
+Mar 31 2006 <shlomif@iglu.org.il> (Shlomi Fish)
+
+  Error.pm #0.15003
+  - Added the lib/Error/Simple.pm module (that just "use"'s Error) so
+    one can say "use base 'Error::Simple';' Added an appropriate test. 
+    Fixes: http://rt.cpan.org/Public/Bug/Display.html?id=17841
+
+Mar 30 2006 <shlomif@iglu.org.il> (Shlomi Fish)
+
+  - Added Scalar::Util to the dependencies in Makefile.PL.
+
+  Error.pm #0.15002
+  - Fixed http://rt.cpan.org/Public/Bug/Display.html?id=18024 and a related
+  exception thrown because ->isa was called on something that was not
+  certainly an object.
+
+  Error.pm #0.15001
+
+  - Moved Error.pm inside the distribution to reside under lib/.
+
 Oct 9 2001 <u_arunkumar@yahoo.com> (Arun Kumar U)
 
   Error.pm #0.15

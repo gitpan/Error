@@ -1,9 +1,15 @@
 ChangeLog
-Error.pm
 Error.ppd
-MANIFEST
-Makefile.PL
-README
 example
+lib/Error.pm
+lib/Error/Simple.pm
+Makefile.PL
+MANIFEST
+META.yml                                 Module meta-data (added by MakeMaker)
+README
 t/01throw.t
 t/02order.t
+t/03throw-non-Error.t
+t/04use-base-Error-Simple.t
+t/05text-errors-with-file-handles.t
+t/lib/MyDie.pm

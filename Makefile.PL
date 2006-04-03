@@ -12,7 +12,11 @@ if ($] >= 5.00503) {
 
 WriteMakefile(
 	NAME	     => 'Error',
-	VERSION_FROM => 'Error.pm',
+	VERSION_FROM => 'lib/Error.pm',
+	PREREQ_PM => 
+	{
+		'Scalar::Util' => 0,
+	},
 	@ppd
 );
 

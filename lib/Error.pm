@@ -15,7 +15,7 @@ use strict;
 use vars qw($VERSION);
 use 5.004;
 
-$VERSION = "0.15"; 
+$VERSION = "0.15005"; 
 
 use overload (
 	'""'	   =>	'stringify',
@@ -33,6 +33,8 @@ my $LAST;		# Last error created
 my %ERROR;		# Last error associated with package
 
 # Exported subs are defined in Error::subs
+
+use Scalar::Util ();
 
 sub import {
     shift;
@@ -234,8 +236,7 @@ sub new {
     local $Error::Depth = $Error::Depth + 1;
 
     @args = ( -file => $1, -line => $2)
-	if($text =~ s/ at (\S+) line (\d+)(\.\n)?$//s);
-
+	if($text =~ s/\s+at\s+(\S+)\s+line\s+(\d+)(?:,\s*<[^>]*>\s+line\s+\d+)?\.?\n?$//s);
     push(@args, '-value', 0 + $value)
 	if defined($value);
 
@@ -288,7 +289,7 @@ sub run_clauses ($$$\@) {
 		    $i -= 2;
 		    next CATCHLOOP;
 		}
-		elsif($err->isa($pkg)) {
+		elsif(Scalar::Util::blessed($err) && $err->isa($pkg)) {
 		    $code = $catch->[$i+1];
 		    while(1) {
 			my $more = 0;
@@ -393,7 +394,17 @@ sub try (&;$) {
     $clauses->{'finally'}->()
 	if(defined($clauses->{'finally'}));
 
-    throw $err if defined($err);
+    if (defined($err))
+    {
+        if (Scalar::Util::blessed($err) && $err->can('throw'))
+        {
+            throw $err;
+        }
+        else
+        {
+            die $err;
+        }
+    }
 
     wantarray ? @result : $result[0];
 }
