@@ -1,6 +1,12 @@
 ChangeLog
 Error.ppd
-example
+examples/example.pl
+examples/next-in-loop/Error.pm-eval.pl
+examples/next-in-loop/Error.pm-next-label.pl
+examples/next-in-loop/Error.pm-next-out-of-catch.pl
+examples/next-in-loop/Error.pm-next.pl
+examples/next-in-loop/README
+examples/warndie.pl
 lib/Error.pm
 lib/Error/Simple.pm
 Makefile.PL
@@ -14,4 +20,5 @@ t/04use-base-Error-Simple.t
 t/05text-errors-with-file-handles.t
 t/06customize-text-throw.t
 t/07try-in-obj-destructor.t
+t/08warndie.t
 t/lib/MyDie.pm
