@@ -15,7 +15,7 @@ use strict;
 use vars qw($VERSION);
 use 5.004;
 
-$VERSION = "0.17001"; 
+$VERSION = "0.17002"; 
 
 use overload (
 	'""'	   =>	'stringify',
@@ -632,7 +632,7 @@ Error - Error/exception handling in an OO-ish way
     try {
 	do_some_stuff();
 	die "error!" if $condition;
-	throw Error::Simple -text => "Oops!" if $other_condition;
+	throw Error::Simple "Oops!" if $other_condition;
     }
     catch Error::IO with {
 	my $E = shift;
