@@ -11,6 +11,7 @@ lib/Error.pm
 lib/Error/Simple.pm
 Makefile.PL
 MANIFEST
+META.yml                                 Module meta-data (added by MakeMaker)
 README
 t/01throw.t
 t/02order.t
@@ -20,5 +21,6 @@ t/05text-errors-with-file-handles.t
 t/06customize-text-throw.t
 t/07try-in-obj-destructor.t
 t/08warndie.t
+t/09dollar-at.t
+t/10throw-in-catch.t
 t/lib/MyDie.pm
-META.yml                                 Module meta-data (added by MakeMaker)
