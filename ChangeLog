@@ -1,3 +1,16 @@
+Oct 07 2006 <shlomif@iglu.org.il> (Shlomi Fish)
+
+  Error.pm #0.17006
+  - t/11rethrow.t - added the test file by Thomas Equeter.
+  - Changed to the more correct behevaiour that fixes the rethrowning
+  error by Thomas Equeter.
+  - see http://rt.cpan.org/Public/Bug/Display.html?id=21612
+  - added t/pod.t to check for POD validity.
+  - added the t/pod-coverage.t file for POD coverage.
+    - added the missing POD.
+  - added "use strict" and "use warnings" to lib/Error/Simple.pm to make
+    CPANTS happy.
+
 Oct 03 2006 <shlomif@iglu.org.il> (Shlomi Fish)
 
   Error.pm #0.17005
