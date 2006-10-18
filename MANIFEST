@@ -1,5 +1,5 @@
+Build.PL
 ChangeLog
-Error.ppd
 examples/example.pl
 examples/next-in-loop/Error.pm-eval.pl
 examples/next-in-loop/Error.pm-next-label.pl
@@ -7,6 +7,7 @@ examples/next-in-loop/Error.pm-next-out-of-catch.pl
 examples/next-in-loop/Error.pm-next.pl
 examples/next-in-loop/README
 examples/warndie.pl
+inc/Test/Run/Builder.pm
 lib/Error.pm
 lib/Error/Simple.pm
 Makefile.PL
