@@ -1,6 +1,6 @@
 ---
 name: Error
-version: 0.17007
+version: 0.17008
 author:
   - 'Graham Barr <gbarr@pobox.com>'
 abstract: Error/exception handling in an OO-ish way
@@ -12,7 +12,7 @@ requires:
 provides:
   Error:
     file: lib/Error.pm
-    version: 0.17007
+    version: 0.17008
   Error::Simple:
     file: lib/Error.pm
   Error::WarnDie:
