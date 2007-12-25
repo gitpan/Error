@@ -1,18 +1,19 @@
 ---
 name: Error
-version: 0.17010
+version: 0.17011
 author:
-  - 'Graham Barr <gbarr@pobox.com>'
+  - 'Shlomi Fish <shlomif@iglu.org.il>'
 abstract: Error/exception handling in an OO-ish way
 license: perl
 resources:
   license: http://dev.perl.org/licenses/
 requires:
   Scalar::Util: 0
+  warnings: 0
 provides:
   Error:
     file: lib/Error.pm
-    version: 0.17010
+    version: 0.17011
   Error::Simple:
     file: lib/Error.pm
   Error::WarnDie:
