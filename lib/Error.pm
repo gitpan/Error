@@ -15,7 +15,7 @@ use strict;
 use vars qw($VERSION);
 use 5.004;
 
-$VERSION = "0.17011"; 
+$VERSION = "0.17012"; 
 
 use overload (
 	'""'	   =>	'stringify',
@@ -317,7 +317,7 @@ sub run_clauses ($$$\@) {
 		my $pkg = $catch->[$i];
 		unless(defined $pkg) {
 		    #except
-		    splice(@$catch,$i,2,$catch->[$i+1]->());
+		    splice(@$catch,$i,2,$catch->[$i+1]->($err));
 		    $i -= 2;
 		    next CATCHLOOP;
 		}
