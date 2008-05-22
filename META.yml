@@ -1,6 +1,6 @@
 ---
 name: Error
-version: 0.17012
+version: 0.17013
 author:
   - 'Shlomi Fish <shlomif@iglu.org.il>'
 abstract: Error/exception handling in an OO-ish way
@@ -9,11 +9,12 @@ resources:
   license: http://dev.perl.org/licenses/
 requires:
   Scalar::Util: 0
+  perl: 5.6.0
   warnings: 0
 provides:
   Error:
     file: lib/Error.pm
-    version: 0.17012
+    version: 0.17013
   Error::Simple:
     file: lib/Error.pm
   Error::WarnDie:
