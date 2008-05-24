@@ -1,6 +1,6 @@
 ---
 name: Error
-version: 0.17013
+version: 0.17014
 author:
   - 'Shlomi Fish <shlomif@iglu.org.il>'
 abstract: Error/exception handling in an OO-ish way
@@ -14,7 +14,7 @@ requires:
 provides:
   Error:
     file: lib/Error.pm
-    version: 0.17013
+    version: 0.17014
   Error::Simple:
     file: lib/Error.pm
   Error::WarnDie:
