@@ -15,7 +15,7 @@ use strict;
 use vars qw($VERSION);
 use 5.004;
 
-$VERSION = "0.17014"; 
+$VERSION = "0.17015"; 
 
 use overload (
 	'""'	   =>	'stringify',
@@ -968,6 +968,17 @@ into
          main::outer('undef') called at examples/warndie.pl line 23
 
 =cut
+
+=head1 SEE ALSO
+
+See L<Exception::Class> for a different module providing Object-Oriented
+exception handling, along with a convenient syntax for declaring hierarchies
+for them. It doesn't provide Error's syntactic sugar of C<try { ... }>,
+C<catch { ... }>, etc. which may be a good thing or a bad thing based
+on what you want. (Because Error's syntactic sugar tends to break.)
+
+L<Error::Exception> aims to combine L<Error> and L<Exception::Class>
+"with correct stringification".
 
 =head1 KNOWN BUGS
 
