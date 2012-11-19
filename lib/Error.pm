@@ -15,7 +15,7 @@ use strict;
 use vars qw($VERSION);
 use 5.004;
 
-$VERSION = "0.17018"; 
+$VERSION = "0.17019"; 
 
 use overload (
 	'""'	   =>	'stringify',
@@ -259,7 +259,7 @@ package Error::Simple;
 
 use vars qw($VERSION);
 
-$VERSION = "0.17018";
+$VERSION = "0.17019";
 
 @Error::Simple::ISA = qw(Error);
 
@@ -1023,7 +1023,7 @@ C<:warndie> handlers added by Paul Evans <leonerd@leonerd.org.uk>
 
 =head1 MAINTAINER
 
-Shlomi Fish <shlomif@iglu.org.il>
+Shlomi Fish, L<http://www.shlomifish.org/> .
 
 =head1 PAST MAINTAINERS
 

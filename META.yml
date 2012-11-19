@@ -1,12 +1,12 @@
 ---
 abstract: 'Error/exception handling in an OO-ish way'
 author:
-  - 'Shlomi Fish <shlomif@iglu.org.il>'
+  - 'Shlomi Fish ( http://www.shlomifish.org/ )'
 build_requires: {}
 configure_requires:
-  Module::Build: 0.38
+  Module::Build: 0.39
 dynamic_config: 1
-generated_by: 'Module::Build version 0.38, CPAN::Meta::Converter version 2.120630'
+generated_by: 'Module::Build version 0.3901, CPAN::Meta::Converter version 2.120921'
 license: perl
 meta-spec:
   url: http://module-build.sourceforge.net/META-spec-v1.4.html
@@ -15,10 +15,10 @@ name: Error
 provides:
   Error:
     file: lib/Error.pm
-    version: 0.17018
+    version: 0.17019
   Error::Simple:
     file: lib/Error.pm
-    version: 0.17018
+    version: 0.17019
   Error::WarnDie:
     file: lib/Error.pm
     version: 0
@@ -31,4 +31,4 @@ requires:
   warnings: 0
 resources:
   license: http://dev.perl.org/licenses/
-version: 0.17018
+version: 0.17019
