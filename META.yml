@@ -15,10 +15,10 @@ name: Error
 provides:
   Error:
     file: lib/Error.pm
-    version: 0.17019
+    version: 0.17020
   Error::Simple:
     file: lib/Error.pm
-    version: 0.17019
+    version: 0.17020
   Error::WarnDie:
     file: lib/Error.pm
     version: 0
@@ -31,4 +31,4 @@ requires:
   warnings: 0
 resources:
   license: http://dev.perl.org/licenses/
-version: 0.17019
+version: 0.17020
