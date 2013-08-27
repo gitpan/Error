@@ -6,7 +6,7 @@ build_requires: {}
 configure_requires:
   Module::Build: 0.39
 dynamic_config: 1
-generated_by: 'Module::Build version 0.3901, CPAN::Meta::Converter version 2.120921'
+generated_by: 'Module::Build version 0.4007, CPAN::Meta::Converter version 2.120921'
 license: perl
 meta-spec:
   url: http://module-build.sourceforge.net/META-spec-v1.4.html
@@ -15,10 +15,10 @@ name: Error
 provides:
   Error:
     file: lib/Error.pm
-    version: 0.17020
+    version: 0.17021
   Error::Simple:
     file: lib/Error.pm
-    version: 0.17020
+    version: 0.17021
   Error::WarnDie:
     file: lib/Error.pm
     version: 0
@@ -31,4 +31,4 @@ requires:
   warnings: 0
 resources:
   license: http://dev.perl.org/licenses/
-version: 0.17020
+version: 0.17021

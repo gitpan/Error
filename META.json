@@ -4,7 +4,7 @@
       "Shlomi Fish ( http://www.shlomifish.org/ )"
    ],
    "dynamic_config" : 1,
-   "generated_by" : "Module::Build version 0.3901, CPAN::Meta::Converter version 2.120921",
+   "generated_by" : "Module::Build version 0.4007, CPAN::Meta::Converter version 2.120921",
    "license" : [
       "perl_5"
    ],
@@ -30,11 +30,11 @@
    "provides" : {
       "Error" : {
          "file" : "lib/Error.pm",
-         "version" : "0.17020"
+         "version" : "0.17021"
       },
       "Error::Simple" : {
          "file" : "lib/Error.pm",
-         "version" : "0.17020"
+         "version" : "0.17021"
       },
       "Error::WarnDie" : {
          "file" : "lib/Error.pm",
@@ -51,5 +51,5 @@
          "http://dev.perl.org/licenses/"
       ]
    },
-   "version" : "0.17020"
+   "version" : "0.17021"
 }
